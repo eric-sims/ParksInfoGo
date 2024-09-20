@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parks-info
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parks-info
+  template:
+    metadata:
+      labels:
+        app: parks-info
+    spec:
+      containers:
+        - name: parks-info
+          image: rotcev77/parks-info:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: parks-info-service
+spec:
+  selector:
+    app: parks-info
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
