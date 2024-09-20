@@ -17,6 +17,9 @@ spec:
           image: rotcev77/parks-info:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: GIN_MODE
+              value: release
 ---
 apiVersion: v1
 kind: Service
